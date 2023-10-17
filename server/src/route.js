@@ -1,14 +1,21 @@
 const UserController = require('./controllers/UserController')
+const UserAuthenController = require('./controllers/UserAuthenController')
+const isAuthenController = require('./authen/isAuthenController')
 
 module.exports = (app) => {
-  app.get('/users', UserController.index),
 
-  app.post('/user', UserController.create),
+  // get all user
+    app.get('/users', isAuthenController, UserController.index),
 
-  app.put('/user/:userId', UserController.put),
+    app.post('/user', UserController.create),
 
-  app.delete('/user/:userId', UserController.delete),
+    app.put('/user/:userId', UserController.put),
 
-  app.get('/user/:userId', UserController.show)
+    app.delete('/user/:userId', UserController.delete),
+
+    app.get('/user/:userId', UserController.show),
+
+    //login
+    app.post('/login', UserAuthenController.login)
 
 }
