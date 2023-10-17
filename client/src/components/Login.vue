@@ -9,9 +9,13 @@
     </form>
   </div>
 </template>
-
+<style scoped>
+.error {
+  color: red;
+}
+</style>
 <script>
-import AuthenService from '@/services/AuthenService'
+import AuthenService from "@/services/AuthenService";
 export default {
   data() {
     return {
@@ -27,12 +31,12 @@ export default {
           email: this.email,
           password: this.password
         });
-
         this.$store.dispatch('setToken', response.data.token)
         this.$store.dispatch('setUser', response.data.user)
 
 
-       
+        this.$store.dispatch('setToken', response.data.token)
+        this.$store.dispatch('setUser', response.data.user)
 
         console.log(response)
 
@@ -52,9 +56,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.error {
-  color: red;
-}
-</style>

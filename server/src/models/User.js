@@ -32,9 +32,11 @@ module.exports = (sequelize, DataTypes) => {
     // return bcrypt.compareSync(password, this.password)
     if (password == this.password) {
       return true
+    }else {
+      return false
     }
-    return false
   }
+  
   User.associate = function (models) { }
 
   return User

@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Get All Users</h1>
-    <p><button v-on:click="logout">Logout</button></p>
+    <div><button v-on:click="logout">Logout</button></div>
     <div>
       <h2>จำนวนผู้ใช้ {{ users.length }}</h2>
     </div>
@@ -14,7 +14,8 @@
       <div><button v-on:click="navigateTo('/user/' + i.id)">ดูข้อมูลผู้ใช้</button></div>
       <div><button @click="navigateTo('/user/edit/' + i.id)">edit user</button></div>
       <div><button @click="deleteUser(i)">delete user</button></div>
-      <hr/>
+      
+      <hr>
     </div>
   </div>
 </template>
@@ -28,8 +29,8 @@ export default {
       users: []
     };
   },
- 
   methods: {
+
     logout() {
       this.$store.dispatch('setToken', null)
       this.$store.dispatch('setUser', null)
@@ -45,16 +46,19 @@ export default {
       if (result) {
         try {
           await UsersService.delete(user)
-          this.refreshData()
+          this.refreshData();
         } catch (err) {
-          console.log(err)
+          console.log(err);
         }
       }
     },
     async refreshData() {
       this.users = (await UsersService.index()).data;
     }
+
   },
+
+
   async created() {
     try {
       this.users = (await UsersService.index()).data;
@@ -66,4 +70,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.error {
+  color: red;
+}
+</style>
